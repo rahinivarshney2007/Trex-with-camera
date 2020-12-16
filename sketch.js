@@ -11,7 +11,7 @@ var obstaclesGroup, obstacle1, obstacle2, obstacle3, obstacle4, obstacle5, obsta
 var score=0;
 
 var gameOver, restart;
-
+var bg1
 localStorage["HighestScore"] = 0;
 
 function preload(){
@@ -28,7 +28,7 @@ function preload(){
   obstacle4 = loadImage("obstacle4.png");
   obstacle5 = loadImage("obstacle5.png");
   obstacle6 = loadImage("obstacle6.png");
-  
+  bg1=loadImage("bg/sprite_3.png")
   gameOverImg = loadImage("gameOver.png");
   restartImg = loadImage("restart.png");
 }
@@ -71,10 +71,10 @@ function setup() {
 function draw() {
   //trex.debug = true;
   background(255);
-  textSize(10)
-  text("Score: "+ score, 500,50);
+  image(bg1,1,1,600,200)
   
   if (gameState===PLAY){
+   
     score = score + Math.round(getFrameRate()/60);
     ground.velocityX = -(6 + 3*score/100);
   
@@ -96,7 +96,7 @@ function draw() {
         gameState = END;
     }
     camera.position.y=trex.y
-    camera.position.x=obstacles.x
+    camera.position.x=obstaclesGroup.x
   
   }
   else if (gameState === END) {
@@ -123,6 +123,8 @@ function draw() {
 
    
   drawSprites();
+  textSize(10)
+  text("Score: "+ score, 500,50)
 }
 
 function spawnClouds() {
